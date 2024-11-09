@@ -38,7 +38,7 @@ jobs:
     - name: Build Debug APK
       run: |
         sed -i 's/\r$//' gradlew
-        chmod +x gradlewr
+        chmod +x gradlew 
 
     - name: Build Release APK
       run: ./gradlew assembleRelease
