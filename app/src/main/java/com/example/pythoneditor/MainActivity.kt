@@ -204,7 +204,7 @@ class MainActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val updateChecker = UpdateChecker(this@MainActivity)
             // 替换为你的实际仓库地址
-            val updateUrl = "https://raw.githubusercontent.com/YOUR_USERNAME/REPO_NAME/main/version.json"
+            val updateUrl = "https://raw.githubusercontent.com/PangTouY00/android-python-editor/main/version.json"
             
             val versionInfo = updateChecker.checkUpdate(updateUrl)
             
