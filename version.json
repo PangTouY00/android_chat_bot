@@ -1,0 +1,7 @@
+{
+    "versionCode": 1,
+    "versionName": "1.0.0",
+    "updateMessage": "首次发布\n- Python代码编辑器\n- 代码高亮显示\n- 自动补全功能\n- pip包管理\n- Git支持",
+    "downloadUrl": "https://github.com/YOUR_USERNAME/REPO_NAME/releases/download/v1.0.0/app-release.apk",
+    "forceUpdate": false
+} 
