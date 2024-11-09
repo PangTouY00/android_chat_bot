@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <com.amrdeveloper.codeview.CodeView
+        android:id="@+id/codeEditor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="top"
+        android:hint="在此输入Python代码"
+        android:background="@android:color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/clearButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="清空代码"/>
+
+        <Button
+            android:id="@+id/runButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="运行代码"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/packageNameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="输入要安装的包名"/>
+
+    <Button
+        android:id="@+id/installPackageButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="安装包"/>
+
+    <EditText
+        android:id="@+id/outputText"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="top"
+        android:hint="输出结果"
+        android:inputType="textMultiLine"
+        android:focusable="false"/>
+
+</LinearLayout> 
