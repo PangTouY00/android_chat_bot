@@ -24,10 +24,57 @@ jobs:
         curl -L -o gradlew https://raw.githubusercontent.com/gradle/gradle/master/gradlew
         chmod +x gradlew
 
+    - name: Setup Gradle Build Files
+      run: |
+        # 创建 settings.gradle
+        echo 'rootProject.name = "android-python-editor"' > settings.gradle
+        echo 'include ":app"' >> settings.gradle
+        
+        # 创建根目录 build.gradle
+        cat > build.gradle << 'EOF'
+        buildscript {
+            repositories {
+                google()
+                mavenCentral()
+                maven { url "https://chaquo.com/maven" }
+                maven { url "https://jitpack.io" }
+                maven { url "https://maven.google.com" }
+            }
+            dependencies {
+                classpath 'com.android.tools.build:gradle:8.1.0'
+                classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0'
+                classpath 'com.chaquo.python:gradle:14.0.2'
+            }
+        }
+        
+        allprojects {
+            repositories {
+                google()
+                mavenCentral()
+                maven { url "https://chaquo.com/maven" }
+                maven { url "https://jitpack.io" }
+                maven { url "https://maven.google.com" }
+            }
+        }
+        
+        task clean(type: Delete) {
+            delete rootProject.buildDir
+        }
+        EOF
+
+        # 创建 gradle.properties
+        cat > gradle.properties << 'EOF'
+        android.useAndroidX=true
+        android.enableJetifier=true
+        kotlin.code.style=official
+        android.nonTransitiveRClass=true
+        android.suppressUnsupportedCompileSdk=34
+        EOF
+
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.x'
+        python-version: '3.8'
 
     - name: Cache Gradle packages
       uses: actions/cache@v3
@@ -39,11 +86,15 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
+    - name: Accept Android SDK Licenses
+      run: |
+        yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
     - name: Build Debug APK
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug --stacktrace
 
     - name: Build Release APK
-      run: ./gradlew assembleRelease
+      run: ./gradlew assembleRelease --stacktrace
 
     - name: Sign Release APK
       uses: r0adkll/sign-android-release@v1
