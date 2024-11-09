@@ -59,8 +59,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    // 添加这些新依赖
-    implementation 'com.amrdeveloper:codeview:1.3.7'
+    // CodeView依赖
+    implementation 'com.github.AmrDeveloper:CodeView:1.3.7'  // 修改为GitHub版本
     implementation 'org.antlr:antlr4-runtime:4.9.3'
-    // ...other dependencies
 } 
