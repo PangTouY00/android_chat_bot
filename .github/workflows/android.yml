@@ -1,7 +1,7 @@
 name: Android CI
 
 on:
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,8 +17,12 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+    - name: Setup Gradle
+      run: |
+        mkdir -p gradle/wrapper
+        curl -L -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/master/gradle/wrapper/gradle-wrapper.jar
+        curl -L -o gradlew https://raw.githubusercontent.com/gradle/gradle/master/gradlew
+        chmod +x gradlew
 
     - name: Setup Python
       uses: actions/setup-python@v4
@@ -36,9 +40,7 @@ jobs:
           ${{ runner.os }}-gradle-
 
     - name: Build Debug APK
-      run: |
-        sed -i 's/\r$//' gradlew
-        chmod +x gradlew 
+      run: ./gradlew assembleDebug
 
     - name: Build Release APK
       run: ./gradlew assembleRelease
@@ -71,7 +73,7 @@ jobs:
       with:
         files: |
           app/build/outputs/apk/debug/app-debug.apk
-          ${{steps.sign_app.outputs.signedReleaseFile}} 
+          ${{steps.sign_app.outputs.signedReleaseFile}}
 
     - name: Update version.json
       if: startsWith(github.ref, 'refs/tags/')
