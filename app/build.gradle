@@ -1,0 +1,66 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.chaquo.python'
+}
+
+android {
+    namespace 'com.example.pythoneditor'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.pythoneditor"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+        python {
+            pip {
+                install "gitpython"
+                install "pip"
+            }
+        }
+    }
+
+    signingConfigs {
+        release {
+            if (System.getenv("CI")) {
+                // CI环境使用环境变量（已配置）
+            } else {
+                storeFile file("../release-key.jks")
+                storePassword "你的STORE_PASSWORD"
+                keyAlias "你的KEY_ALIAS"
+                keyPassword "你的KEY_PASSWORD"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+dependencies {
+    implementation "com.chaquo.python:android:13.0.0"
+    implementation "org.eclipse.jgit:org.eclipse.jgit:5.13.0.202109080827-r"
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    // 添加这些新依赖
+    implementation 'com.amrdeveloper:codeview:1.3.7'
+    implementation 'org.antlr:antlr4-runtime:4.9.3'
+    // ...other dependencies
+} 
