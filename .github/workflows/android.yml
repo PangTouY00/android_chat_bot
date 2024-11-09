@@ -36,7 +36,9 @@ jobs:
           ${{ runner.os }}-gradle-
 
     - name: Build Debug APK
-      run: ./gradlew assembleDebug
+      run: |
+        sed -i 's/\r$//' gradlew
+        chmod +x gradlewr
 
     - name: Build Release APK
       run: ./gradlew assembleRelease
