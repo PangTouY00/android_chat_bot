@@ -1,0 +1,9 @@
+* text=auto
+gradlew eol=lf
+*.sh eol=lf
+# 确保这些文件始终使用LF换行符
+gradlew text eol=lf
+*.sh text eol=lf
+
+# 其他文件自动处理
+* text=auto
