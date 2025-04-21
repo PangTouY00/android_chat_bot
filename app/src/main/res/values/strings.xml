@@ -1,4 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Python Editor</string>
-</resources> 
+    <string name="app_name">聊天回复助手</string>
+    <string-array name="tone_options">
+        <item>推荐</item>
+        <item>高情商</item>
+        <item>暧昧推拉</item>
+        <item>土味情话</item>
+        <item>神回复</item>
+        <item>温柔体贴</item>
+        <item>深情</item>
+        <item>成熟稳重</item>
+        <item>怼Ta</item>
+        <item>赞美</item>
+        <item>情绪价值</item>
+        <item>哄女友</item>
+        <item>自定义</item>
+    </string-array>
+</resources>
